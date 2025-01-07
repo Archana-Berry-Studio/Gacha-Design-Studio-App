@@ -24,7 +24,7 @@ Game webview ini masih menimbulkan banyak bugs...
 |---------------------------|------------------------------------------------------------------------------------------------------------------|--------|
 | Tampilan WebView          | Memuat game Gacha Design Studio menggunakan WebView di dalam aplikasi Android.                                  | ✅ |
 | Main Activity dan Webview terpisah              | GachaStudioMain (berguna sebagai loader sekaligus managing update resource) dengan GachaStudio (webview) dibuat terpisah agar lebih mudah dimaintain/mengurus jika terjadi suatu bug dan memungkinkan fullscreen activity.           | ✅ |
-| Pengecekan Update sumber daya melalui manifest         | Memuat resource game Gacha Design Studio menggunakan pembanding file manifest lokal dengan di rawgithub (membuat seolah olah menjadi API) untuk melakukan update baik aplikasi nya atau resource nya.                                | ❌ |
+| Pengecekan Update sumber daya melalui manifest         | Memuat resource game Gacha Design Studio menggunakan pembanding file manifest lokal dengan di rawgithub (membuat seolah olah menjadi API (antarmuka program aplikasi) ) untuk melakukan update baik aplikasi nya atau resource nya.                                | ❌ |
 | Alert Custom              | Menampilkan pesan alert khusus dengan judul besar dan pesan kecil, serta opsi untuk menyalin teks ke papan klip. | ✅ |
 | Navigasi Mundur           | Memungkinkan pengguna untuk mundur ke halaman sebelumnya saat menekan tombol kembali di perangkat Android.       | ✅ |
 | Mundurkan halaman bingkai (frame content) pakai tombol kembali        | Memungkinkan pengguna untuk mundur frame atau keluarkan window di game GDS pakai tombol back atau esc       | ❌ |
@@ -37,8 +37,9 @@ Game webview ini masih menimbulkan banyak bugs...
 | Indikator pengunduhan, pengekstrakan sumber daya         | [BUG!!!] Untuk mengetahui progres pemasangan sumber daya game GDS agar tahu berapa lama dan berapa persen.       | ❌ |
 | Terjemahkan secara dinamis dengan bahasa sistem (Menggunakan library ( [TransVar - Translator Variable](https://github.com/archanaberry/transvar) )                | Merespons perubahan bahasa menyesuaikan dengan bahasa lokalisasi sistem yang sedang digunakan berlangsung secara menyeluruh baik MainActivity dan Webview beserta html5 nya.              | ❌ |
 | Archana Berry dan Lunime Logger Report (GachaStudioLogger.kt)                | Merespons melaporkan menjalankan game sekaligus mendebug dan melaporkan kode kesalahan dengan mudah ke pengembang ku, berfungsi baik kode inspeksi html5 web ataupun log kode aplikasi tiap berjalan (MainActivity), Peran tipe log dari Archana Berry sebagai Analisis dan Lunime sebagai Error Kerusakan !.               | ✅ |
-| Archana Berry CrashAnalytic & CrashHandler             | Merespons memunculkan dialog text yang berisi Lapo terhadap kode bentrok yang membuat game nya berhenti               | ❌ |
+| Archana Berry CrashAnalytic & CrashHandler             | Merespons memunculkan dialog text yang berisi laporan terhadap kode bentrok yang membuat game nya berhenti               | ❌ |
 | Webview runtime engine compiled "Gacha Data resource Compiled" (.dgc file) | Implementasi pendekatan yang berguna untuk menyetabilkan dan mengompres penyimpanan sumber daya kecil kecil seperti SVG, PNG, Skrip skenario game, Skrip bingkai konten "frame<N>.js", dll. supaya lebih efisien dan lebih ringan tanpa harus diekstrak sama seperti SWF (Adobe Flash) | ❌ |
+| Rencana membuat codespase alternatif github (untuk kebutuhan pengembangan tim di komunitas) | Agar kode game nya tidak ditiru dan dibuat versi lain, untuk penggunaan sumber daya boleh tidak untuk program dan skrip skenario. | ✅ |
 
 ## Bahasa pemrograman yang dipakai
 * Tolong diperbaiki bug dari kotlin nya!
