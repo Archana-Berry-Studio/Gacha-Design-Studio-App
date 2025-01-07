@@ -31,6 +31,8 @@ Game webview ini masih menimbulkan banyak bugs...
 | Mengunduh resource game    | Mengunduh sumber daya dengan indikator di dialog box dan juga di notifikasi.             | ❌ |
 | Keluar dengan konfirmasi dua kali klik      | Ketuk dua kali agar aplikasi dapat dikonfirmasi agar aman untuk keluar dari gane agar tidak mereset sesi game.         | ✅ |
 | FullScreen                 | Merespons layar penuh untuk semua device baik ponsel atau tablet atau komputer PC.                   | ❌ |
+| Tema terang gelap secara dinamis                | Merespons tema dan akan mengikuti setelan tema di setelan sistem, ini akan mempengaruhi tema di game web nya juga (dipengaruhi juga menggunakan metode fetch systemTheme())                   | ❌ |
+| Exit button escape & back (untuk android)                | Merespons tombol back atau esc sebagai tombol keluar atau pause studio ketika ditekan.                   | ❌ |
 | Berbagi server studio atau Menerima klien studio dari saya ke teman dan ke teman lainnya via wlan0 (hotspot/wifi rumah (server kecil kecilan))               | Merespons server dan klien untuk melalukan berbagi studiospaces kepada teman melalui wlan0 dengan IPv4 (IP versi 4) menggunakan websocket untuk menjamin real time tiap pergerakan.              | ❌ |
 | Responsif                 | Merespons perubahan orientasi dan ukuran layar perangkat Android untuk tampilan yang optimal.                   | ✅ |
 | Migrasi ke Skrip Kotlin untuk pengompilasi APK                 | Untuk mengganti cara kompilasi menggunakan skrip terbaru (.kts).                   | ✅ |
@@ -39,7 +41,7 @@ Game webview ini masih menimbulkan banyak bugs...
 | Archana Berry dan Lunime Logger Report (GachaStudioLogger.kt)                | Merespons melaporkan menjalankan game sekaligus mendebug dan melaporkan kode kesalahan dengan mudah ke pengembang ku, berfungsi baik kode inspeksi html5 web ataupun log kode aplikasi tiap berjalan (MainActivity), Peran tipe log dari Archana Berry sebagai Analisis dan Lunime sebagai Error Kerusakan !.               | ✅ |
 | Archana Berry CrashAnalytic & CrashHandler             | Merespons memunculkan dialog text yang berisi laporan terhadap kode bentrok yang membuat game nya berhenti               | ❌ |
 | Webview runtime engine compiled "Gacha Data resource Compiled" (.dgc file) | Implementasi pendekatan yang berguna untuk menyetabilkan dan mengompres penyimpanan sumber daya kecil kecil seperti SVG, PNG, Skrip skenario game, Skrip bingkai konten "frame<N>.js", dll. supaya lebih efisien dan lebih ringan tanpa harus diekstrak sama seperti SWF (Adobe Flash) | ❌ |
-| Rencana membuat codespase alternatif github (untuk kebutuhan pengembangan tim di komunitas) | Agar kode game nya tidak ditiru dan dibuat versi lain, untuk penggunaan sumber daya boleh tidak untuk program dan skrip skenario. | ✅ |
+| Rencana membuat codespase alternatif github (untuk kebutuhan pengembangan tim di komunitas) | Agar kode game nya tidak ditiru dan dibuat versi lain, untuk penggunaan sumber daya boleh tidak untuk program dan skrip skenario. | ❌ |
 
 ## Bahasa pemrograman yang dipakai
 * Tolong diperbaiki bug dari kotlin nya!
