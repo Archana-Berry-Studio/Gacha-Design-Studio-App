@@ -35,15 +35,21 @@ Game webview ini masih menimbulkan banyak bugs...
 | Responsif                 | Merespons perubahan orientasi dan ukuran layar perangkat Android untuk tampilan yang optimal.                   | ✅ |
 | Migrasi ke Skrip Kotlin untuk pengompilasi APK                 | Untuk mengganti cara kompilasi menggunakan skrip terbaru (.kts).                   | ✅ |
 | Indikator pengunduhan, pengekstrakan sumber daya         | [BUG!!!] Untuk mengetahui progres pemasangan sumber daya game GDS agar tahu berapa lama dan berapa persen.       | ❌ |
-| Terjemahkan secara dinamis dengan bahasa sistem (Menggunakan library ( ![TransVar - Translator Variable](https://github.com/archanaberry/transvar) )                | Merespons perubahan bahasa menyesuaikan dengan bahasa lokalisasi sistem yang sedang digunakan berlangsung secara menyeluruh baik MainActivity dan Webview beserta html5 nya.              | ❌ |
+| Terjemahkan secara dinamis dengan bahasa sistem (Menggunakan library ( [TransVar - Translator Variable](https://github.com/archanaberry/transvar) )                | Merespons perubahan bahasa menyesuaikan dengan bahasa lokalisasi sistem yang sedang digunakan berlangsung secara menyeluruh baik MainActivity dan Webview beserta html5 nya.              | ❌ |
 | Archana Berry dan Lunime Logger Report (GachaStudioLogger.kt)                | Merespons melaporkan menjalankan game sekaligus mendebug dan melaporkan kode kesalahan dengan mudah ke pengembang ku, berfungsi baik kode inspeksi html5 web ataupun log kode aplikasi tiap berjalan (MainActivity), Peran tipe log dari Archana Berry sebagai Analisis dan Lunime sebagai Error Kerusakan !.               | ✅ |
+| Archana Berry CrashAnalytic & CrashHandler             | Merespons memunculkan dialog text yang berisi Lapo terhadap kode bentrok yang membuat game nya berhenti               | ❌ |
+| Webview runtime engine compiled "Gacha Data resource Compiled" (.dgc file) | Implementasi pendekatan yang berguna untuk menyetabilkan dan mengompres penyimpanan sumber daya kecil kecil seperti SVG, PNG, Skrip skenario game, Skrip bingkai konten "frame<N>.js", dll. supaya lebih efisien dan lebih ringan tanpa harus diekstrak sama seperti SWF (Adobe Flash) | ❌ |
+j
 
 ## Bahasa pemrograman yang dipakai
 * Tolong diperbaiki bug dari kotlin nya!
 <img src="archanaberry/Kotlin.png" alt="Menggunakan kotlin sebagai program utama" width="192" height="108">
 
 ## Informasi 
-Kami akan segera membuat ulang project ini dengan rancangan yang benar.
+Proyek ini masih berjalan tetapi dikerjakan di waktu luang (gabut).
+Kami akan segera sebisa mungkin membuat ulang project ini dengan rancangan yang benar.
+dan juga,
+Kami akan merilis game ini di PlayStore jika Lunime memperbolehkan nya.
 
 ## Terimakasih untuk:
 ![lunime credits arts (open source but don't forget to remember her :>)](archanaberry/lunime.svg)
