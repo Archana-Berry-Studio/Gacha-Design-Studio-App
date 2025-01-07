@@ -39,7 +39,6 @@ Game webview ini masih menimbulkan banyak bugs...
 | Archana Berry dan Lunime Logger Report (GachaStudioLogger.kt)                | Merespons melaporkan menjalankan game sekaligus mendebug dan melaporkan kode kesalahan dengan mudah ke pengembang ku, berfungsi baik kode inspeksi html5 web ataupun log kode aplikasi tiap berjalan (MainActivity), Peran tipe log dari Archana Berry sebagai Analisis dan Lunime sebagai Error Kerusakan !.               | ✅ |
 | Archana Berry CrashAnalytic & CrashHandler             | Merespons memunculkan dialog text yang berisi Lapo terhadap kode bentrok yang membuat game nya berhenti               | ❌ |
 | Webview runtime engine compiled "Gacha Data resource Compiled" (.dgc file) | Implementasi pendekatan yang berguna untuk menyetabilkan dan mengompres penyimpanan sumber daya kecil kecil seperti SVG, PNG, Skrip skenario game, Skrip bingkai konten "frame<N>.js", dll. supaya lebih efisien dan lebih ringan tanpa harus diekstrak sama seperti SWF (Adobe Flash) | ❌ |
-j
 
 ## Bahasa pemrograman yang dipakai
 * Tolong diperbaiki bug dari kotlin nya!
