@@ -11,7 +11,7 @@ Browser game semi-online khusus android untuk Gacha Design Studio dibuat oleh Lu
 # Fitur Gacha Design Studio webview
 * Library write/read file (no download/upload file method)
 * Download automation resource from (https://github.com/archanaberry/Gacha-Design-Studio)
-* Fullscreen for phone tablet and PC
+* Fullscreen for Phone, Tablet, and PC
 * Migration SWF (Adobe Flash Player) to HTML5 (Custom Browser)
 * Server-Client protocol for sharing studiospaces enjoying friend.
 * Use Vanila JS, Pure CSS, HTML5 for natively resource Gacha Game.
@@ -40,8 +40,11 @@ Game webview ini masih menimbulkan banyak bugs...
 | Terjemahkan secara dinamis dengan bahasa sistem (Menggunakan library ([TransVar - Translator Variable](https://github.com/archanaberry/transvar) tetapi versi Kotlin nya)                | Merespons perubahan bahasa menyesuaikan dengan bahasa lokalisasi sistem yang sedang digunakan berlangsung secara menyeluruh baik MainActivity dan Webview beserta html5 nya.              | ❌ |
 | Archana Berry dan Lunime Logger Report (GachaStudioLogger.kt)                | Merespons melaporkan menjalankan game sekaligus mendebug dan melaporkan kode kesalahan dengan mudah ke pengembang ku, berfungsi baik kode inspeksi html5 web ataupun log kode aplikasi tiap berjalan (MainActivity), Peran tipe log dari Archana Berry sebagai Analisis dan Lunime sebagai Error Kerusakan !.               | ✅ |
 | Archana Berry CrashAnalytic & CrashHandler             | Merespons memunculkan dialog text yang berisi laporan terhadap kode bentrok yang membuat game nya berhenti               | ❌ |
-| Webview runtime engine compiled "Gacha Data resource Compiled" (.dgc file) | Implementasi pendekatan yang berguna untuk menyetabilkan dan mengompres penyimpanan sumber daya kecil kecil seperti SVG, PNG, Skrip skenario game, Skrip bingkai konten "frame<N>.js", dll. supaya lebih efisien dan lebih ringan tanpa harus diekstrak sama seperti SWF (Adobe Flash) | ❌ |
+| Webview runtime engine compiled "Data Gacha resource Compiled" (.dgc file) | Implementasi pendekatan yang serupa seperti swf tetapi berguna untuk menyetabilkan dan mengompres penyimpanan sumber daya kecil kecil seperti SVG, PNG, Skrip skenario game, Skrip bingkai konten "frame<N>.js", dll. supaya lebih efisien dan lebih ringan tanpa harus diekstrak sama seperti SWF (Adobe Flash) | ❌ |
 | Rencana membuat codespase alternatif github (untuk kebutuhan pengembangan tim di komunitas) | Agar kode game nya tidak ditiru dan dibuat versi lain, untuk penggunaan sumber daya boleh tidak untuk program dan skrip skenario. | ❌ |
+
+* Kelebihan bisa berkontribusi menambahkan aset vektor lebih mudah dan terstruktur.
+* Kekurangan jika gambar vektor (svg) dirender ke web dalam jumlah objek sedikit atau banyak bisa menyebabkan laggy (tiap pergerakan atau animasi atau besar kecil ukuran/resolusi gambar)
 
 ## Bahasa pemrograman yang dipakai
 * Tolong diperbaiki bug dari kotlin nya!
