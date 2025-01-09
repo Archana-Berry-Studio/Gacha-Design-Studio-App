@@ -46,6 +46,13 @@ Game webview ini masih menimbulkan banyak bugs...
 * Kelebihan bisa berkontribusi menambahkan aset vektor lebih mudah dan terstruktur.
 * Kekurangan jika gambar vektor (svg) dirender ke web dalam jumlah objek sedikit atau banyak bisa menyebabkan laggy (tiap pergerakan atau animasi atau besar kecil ukuran/resolusi gambar)
 
+## Tangkapan layar
+![Tangkapan layar 1](archanaberry/screenshot/screenshot0.png)  
+![Tangkapan layar 2](archanaberry/screenshot/screenshot1.png)  
+![Tangkapan layar 3](archanaberry/screenshot/screenshot2.png)  
+![Tangkapan layar 4](archanaberry/screenshot/screenshot3.png)  
+![Tangkapan layar 5](archanaberry/screenshot/screenshot4.png)
+
 ## Bahasa pemrograman yang dipakai
 * Tolong diperbaiki bug dari kotlin nya!
 <img src="archanaberry/Kotlin.png" alt="Menggunakan kotlin sebagai program utama" width="192" height="108">
