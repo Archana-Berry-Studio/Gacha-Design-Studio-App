@@ -47,7 +47,13 @@ Game webview ini masih menimbulkan banyak bugs...
 * Kelebihan bisa berkontribusi menambahkan aset vektor lebih mudah dan terstruktur.
 * Kekurangan jika gambar vektor (svg) dirender ke web dalam jumlah objek sedikit atau banyak bisa menyebabkan laggy (tiap pergerakan atau animasi atau besar kecil ukuran/resolusi gambar)
 
-## Tangkapan layar
+# Tangkapan layar
+
+## Bagian pertama
+![Tangkapan layar 1](archanaberry/screenshot/screenshotd0.png)  
+![Tangkapan layar 2](archanaberry/screenshot/screenshotd1.png)  
+
+## Bagian kedua
 ![Tangkapan layar 1](archanaberry/screenshot/screenshot0.png)  
 * Tema gelap ketika sistem menggunakan tema gelap dah bahasa Indonesia (dinamis)
 ![Tangkapan layar 2](archanaberry/screenshot/screenshot1.png)
