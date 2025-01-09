@@ -19,6 +19,7 @@ Browser game semi-online khusus android untuk Gacha Design Studio dibuat oleh Lu
 Game webview ini masih menimbulkan banyak bugs...
 * Sudah oke ✅
 * Belum difix ❌
+* Sedang diperbaiki 💡
 
 | Fitur                     | Deskripsi                                                                                                        | Status |
 |---------------------------|------------------------------------------------------------------------------------------------------------------|--------|
@@ -31,13 +32,13 @@ Game webview ini masih menimbulkan banyak bugs...
 | Mengunduh resource game    | Mengunduh sumber daya dengan indikator di dialog box dan juga di notifikasi.             | ❌ |
 | Keluar dengan konfirmasi dua kali klik      | Ketuk dua kali agar aplikasi dapat dikonfirmasi agar aman untuk keluar dari gane agar tidak mereset sesi game.         | ✅ |
 | FullScreen                 | Merespons layar penuh untuk semua device baik ponsel atau tablet atau komputer PC.                   | ❌ |
-| Tema terang gelap secara dinamis                | Merespons tema dan akan mengikuti setelan tema di setelan sistem, ini akan mempengaruhi tema di game web nya juga (dipengaruhi juga menggunakan metode fetch systemTheme())                   | ❌ |
+| Tema terang gelap secara dinamis                | Merespons tema dan akan mengikuti setelan tema di setelan sistem, ini akan mempengaruhi tema di game web nya juga (dipengaruhi juga menggunakan metode fetch systemTheme())                   | 💡 |
 | Exit button escape & back (untuk android)                | Merespons tombol back atau esc sebagai tombol keluar atau pause studio ketika ditekan.                   | ❌ |
 | Berbagi server studio atau Menerima klien studio dari saya ke teman dan ke teman lainnya via wlan0 (hotspot/wifi rumah (server kecil kecilan))               | Merespons server dan klien untuk melalukan berbagi studiospaces kepada teman melalui wlan0 dengan IPv4 (IP versi 4) menggunakan websocket untuk menjamin real time tiap pergerakan.              | ❌ |
 | Responsif                 | Merespons perubahan orientasi dan ukuran layar perangkat Android untuk tampilan yang optimal.                   | ✅ |
 | Migrasi ke Skrip Kotlin untuk pengompilasi APK                 | Untuk mengganti cara kompilasi menggunakan skrip terbaru (.kts).                   | ✅ |
 | Indikator pengunduhan, pengekstrakan sumber daya         | [BUG!!!] Untuk mengetahui progres pemasangan sumber daya game GDS agar tahu berapa lama dan berapa persen.       | ❌ |
-| Terjemahkan secara dinamis dengan bahasa sistem (Menggunakan library ([TransVar - Translator Variable](https://github.com/archanaberry/transvar) tetapi versi Kotlin nya)                | Merespons perubahan bahasa menyesuaikan dengan bahasa lokalisasi sistem yang sedang digunakan berlangsung secara menyeluruh baik MainActivity dan Webview beserta html5 nya.              | ❌ |
+| Terjemahkan secara dinamis dengan bahasa sistem (Menggunakan library ([TransVar - Translator Variable](https://github.com/archanaberry/transvar) tetapi versi Kotlin nya)                | Merespons perubahan bahasa menyesuaikan dengan bahasa lokalisasi sistem yang sedang digunakan berlangsung secara menyeluruh baik MainActivity dan Webview beserta html5 nya.              | 💡 |
 | Archana Berry dan Lunime Logger Report (GachaStudioLogger.kt)                | Merespons melaporkan menjalankan game sekaligus mendebug dan melaporkan kode kesalahan dengan mudah ke pengembang ku, berfungsi baik kode inspeksi html5 web ataupun log kode aplikasi tiap berjalan (MainActivity), Peran tipe log dari Archana Berry sebagai Analisis dan Lunime sebagai Error Kerusakan !.               | ✅ |
 | Archana Berry CrashAnalytic & CrashHandler             | Merespons memunculkan dialog text yang berisi laporan terhadap kode bentrok yang membuat game nya berhenti               | ❌ |
 | Webview runtime engine compiled "Data Gacha resource Compiled" (.dgc file) | Implementasi pendekatan yang serupa seperti swf tetapi berguna untuk menyetabilkan dan mengompres penyimpanan sumber daya kecil kecil seperti SVG, PNG, Skrip skenario game, Skrip bingkai konten "frame<N>.js", dll. supaya lebih efisien dan lebih ringan tanpa harus diekstrak sama seperti SWF (Adobe Flash) | ❌ |
@@ -48,10 +49,15 @@ Game webview ini masih menimbulkan banyak bugs...
 
 ## Tangkapan layar
 ![Tangkapan layar 1](archanaberry/screenshot/screenshot0.png)  
-![Tangkapan layar 2](archanaberry/screenshot/screenshot1.png)  
-![Tangkapan layar 3](archanaberry/screenshot/screenshot2.png)  
-![Tangkapan layar 4](archanaberry/screenshot/screenshot3.png)  
+* Tema gelap ketika sistem menggunakan tema gelap dah bahasa Indonesia (dinamis)
+![Tangkapan layar 2](archanaberry/screenshot/screenshot1.png)
+* Tema terang ketika sistem menggunakan tema terang dan bahasa Inggris (dinamis)
+![Tangkapan layar 3](archanaberry/screenshot/screenshot2.png)
+* Ketika sumber daya file .dgc (Data Gacha resource Compiled) berhasil di download
+![Tangkapan layar 4](archanaberry/screenshot/screenshot3.png)
+* Lunime loading screen (Webview fullscreen)
 ![Tangkapan layar 5](archanaberry/screenshot/screenshot4.png)
+* Tapsceeen ketika sudah selesai loading (Webview fullscreen)
 
 ## Bahasa pemrograman yang dipakai
 * Tolong diperbaiki bug dari kotlin nya!
