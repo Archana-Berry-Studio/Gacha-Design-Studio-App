@@ -70,10 +70,12 @@ Game webview ini masih menimbulkan banyak bugs...
 <img src="archanaberry/Kotlin.png" alt="Menggunakan kotlin sebagai program utama" width="192" height="108">
 
 ## Informasi 
-Proyek ini masih berjalan tetapi dikerjakan di waktu luang (gabut).
-Kami akan segera sebisa mungkin membuat ulang project ini dengan rancangan yang benar.
-dan juga,
-Kami akan merilis game ini di PlayStore jika Lunime memperbolehkan nya.
+Proyek ini masih berjalan tetapi dikerjakan di waktu luang (gabut).  
+Kami akan segera sebisa mungkin membuat ulang project ini dengan rancangan yang benar.  
+dan juga,  
+Kami akan merilis game ini di PlayStore jika Lunime memperbolehkan nya.  
+
+_Jangan mengkompilasi proyek dan mengupload aplikasi tanpa seizin saya dan Lunime!!!_
 
 ## Terimakasih untuk:
 ![lunime credits arts (open source but don't forget to remember her :>)](archanaberry/lunime.svg)
