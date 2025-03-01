@@ -1,34 +1,40 @@
 package com.lunime.githubcollab.archanaberry.gachadesignstudio
 
 import android.os.Process
+import org.w3c.dom.Document
+import org.w3c.dom.Element
 import java.io.File
+import java.io.FileInputStream
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.xml.parsers.DocumentBuilderFactory
 
 object GachaStudioLogger {
 
-    private val logBuffer = mutableListOf<String>() // Buffer untuk menyimpan log sementara
+    private val logBuffer = mutableListOf<String>()
+    private var logFile: File? = null
+    private var isLoggingEnabled: Boolean = true // Default aktif
 
-    // Fungsi untuk mendeteksi direktori dinamis berdasarkan ID user
+    // Direktori Dinamis
+    private val baseDir: String = detectDynamicDirectory()
+    private val APP_FOLDER = "/Lunime/Gacha Design Studio"
+    
+    private val CONFIG_FILE_PATH = "$baseDir$APP_FOLDER/data/data.xml"
+    private val LOG_DIR_PATH = "$baseDir$APP_FOLDER/data/logging"
+
     private fun detectDynamicDirectory(): String {
         val userId = Process.myUserHandle().hashCode()
         return if (userId == 0) {
-            "/storage/emulated/0"  // Direktori umum untuk user 0
+            "/storage/emulated/0"
         } else {
-            "/storage/emulated/$userId"  // Direktori berdasarkan ID user
+            "/storage/emulated/$userId"
         }
     }
 
-    // Fungsi untuk membuat/memilih file log
     private fun getLogFile(): File {
-        val directory = File(detectDynamicDirectory() + "/Lunime/data/logging")
+        val directory = File(LOG_DIR_PATH)
         if (!directory.exists()) {
-            val created = directory.mkdirs()  // Membuat folder logging jika belum ada
-            if (created) {
-                println("Folder logging berhasil dibuat di: ${directory.absolutePath}")
-            } else {
-                println("Gagal membuat folder logging di: ${directory.absolutePath}")
-            }
+            directory.mkdirs()
         }
 
         val dateFormat = SimpleDateFormat("ddMMMyyyy", Locale.getDefault())
@@ -36,7 +42,6 @@ object GachaStudioLogger {
         var logFile = File(directory, "log0-$date.txt")
         var logIndex = 0
 
-        // Cek apakah file log sudah ada dan tentukan log berikutnya
         while (logFile.exists()) {
             logIndex++
             logFile = File(directory, "log$logIndex-$date.txt")
@@ -45,43 +50,51 @@ object GachaStudioLogger {
         return logFile
     }
 
-    // Fungsi untuk mencetak log dan menyimpannya ke buffer
+    // Fungsi untuk membaca status logging dari data.xml
+    private fun updateLoggingStatus() {
+        val configFile = File(CONFIG_FILE_PATH)
+
+        if (configFile.exists()) {
+            try {
+                val dbFactory = DocumentBuilderFactory.newInstance()
+                val dBuilder = dbFactory.newDocumentBuilder()
+                val fis = FileInputStream(configFile)
+                val doc: Document = dBuilder.parse(fis)
+                doc.documentElement.normalize()
+
+                val loggingNodes = doc.getElementsByTagName("logging")
+                if (loggingNodes.length > 0) {
+                    val loggingNode = loggingNodes.item(0) as Element
+                    isLoggingEnabled = loggingNode.getAttribute("enabled") == "true"
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
+
     fun log(message: String, isError: Boolean = false) {
+        updateLoggingStatus() // Selalu baca ulang status logging sebelum menulis log
+
+        if (!isLoggingEnabled) return
+
         val timeFormat = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
         val timeStamp = timeFormat.format(Date())
         val dateFormat = SimpleDateFormat("ddMMMyyyy", Locale.getDefault())
         val date = dateFormat.format(Date())
 
-        // Tentukan kategori log berdasarkan jenis pesan
         val logType = if (isError) "Lunime Corrupted" else "Archana Berry Analyzer"
-
-        // Format pesan log
         val logMessage = "$timeStamp/$date - $logType: $message"
 
-        // Tampilkan di konsol
         println(logMessage)
 
-        // Simpan log ke buffer
-        logBuffer.add(logMessage)
-    }
-
-    // Fungsi untuk menyimpan semua log dari buffer ke file
-    fun flushLogs() {
         try {
-            val logFile = getLogFile()
-            logBuffer.forEach { logMessage ->
-                logFile.appendText("$logMessage\n")
+            if (logFile == null) {
+                logFile = getLogFile()
             }
-            logBuffer.clear() // Bersihkan buffer setelah disimpan
+            logFile?.appendText("$logMessage\n")
         } catch (e: Exception) {
-            println("Gagal menyimpan log ke file: ${e.message}")
+            println("Gagal menulis log ke file: ${e.message}")
         }
-    }
-
-    // Tambahkan *shutdown hook* untuk menyimpan log saat aplikasi keluar
-    init {
-        Runtime.getRuntime().addShutdownHook(Thread {
-            flushLogs() // Simpan semua log saat aplikasi dihentikan
-        })
     }
 }

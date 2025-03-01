@@ -1,139 +1,98 @@
 package com.lunime.githubcollab.archanaberry.gachadesignstudio
 
 import android.content.Context
-import android.widget.Toast
-import java.io.IOException
-import java.util.*
+import java.io.BufferedReader
+import java.io.InputStreamReader
+import java.util.Locale
 
-object ParsingString {
-
-    fun computeLpsArray(pattern: String): IntArray {
-        val m = pattern.length
-        val lps = IntArray(m)
-        var len = 0
-        var i = 1
-
-        while (i < m) {
-            if (pattern[i] == pattern[len]) {
-                len++
-                lps[i] = len
-                i++
-            } else {
-                if (len != 0) {
-                    len = lps[len - 1]
-                } else {
-                    lps[i] = 0
-                    i++
-                }
-            }
-        }
-        return lps
-    }
-
-    fun matchPattern(input: String, pattern: String): List<String> {
-        val matches = mutableListOf<String>()
-        val delimiter = "\u2B80"
-        var start = input.indexOf(delimiter)
-
-        while (start != -1) {
-            var end = input.indexOf(delimiter, start + 1)
-            if (end == -1) break
-
-            val match = input.substring(start + 1, end)
-            matches.add(match)
-
-            start = input.indexOf(delimiter, end + 1)
-        }
-        return matches
-    }
-}
-
-class GachaStudioLocalization private constructor() {
-    private val translations: MutableMap<String, String> = mutableMapOf()
+class GachaStudioLocalization private constructor(private val localizationMap: Map<String, String>) {
 
     companion object {
-        val instance: GachaStudioLocalization by lazy { GachaStudioLocalization() }
-    }
+        private const val LANGUAGE_FOLDER = "localization"
+        private const val DEFAULT_LANGUAGE = "en"
+        private const val LANGUAGE_PREFIX = "GachaStudio."
 
-    private fun loadFileLangFromAssets(context: Context, filename: String): Boolean {
-        try {
-            val inputStream = context.assets.open("localization/$filename")
-            inputStream.bufferedReader().useLines { lines ->
-                lines.forEach { line ->
-                    val matches = ParsingString.matchPattern(line, "\u2B80")
-                    if (matches.size >= 2) {
-                        translations[matches[0]] = matches[1]
+        private const val DELIMITER = "\u2B80" // Simbol '⮀'
+        private const val NEWLINE_PLACEHOLDER = "\\nl\\" // Placeholder untuk newline
+
+        /**
+         * Factory method untuk membuat instance GachaStudioLocalization
+         */
+        fun load(context: Context): GachaStudioLocalization {
+            val languageCode = getSystemLanguageCode()
+            val filesToTry = listOf(
+                "$LANGUAGE_PREFIX$languageCode",
+                "$LANGUAGE_PREFIX$DEFAULT_LANGUAGE"
+            )
+
+            val localizationMap = loadLanguageFiles(context, filesToTry)
+            return GachaStudioLocalization(localizationMap)
+        }
+
+        private fun getSystemLanguageCode(): String {
+            return Locale.getDefault().language.lowercase()
+        }
+
+        private fun loadLanguageFiles(context: Context, filesToTry: List<String>): Map<String, String> {
+            val map = mutableMapOf<String, String>()
+            val assetManager = context.assets
+
+            for (fileName in filesToTry) {
+                try {
+                    val fullPath = "$LANGUAGE_FOLDER/$fileName"
+                    assetManager.open(fullPath).use { inputStream ->
+                        val reader = BufferedReader(InputStreamReader(inputStream))
+                        reader.forEachLine { line ->
+                            val (key, value) = parseKeyValue(line)
+                            if (key.isNotBlank()) {
+                                map[key] = value
+                            }
+                        }
                     }
+                    return map
+                } catch (e: Exception) {
+                    println("Tidak dapat memuat file bahasa: $fileName")
                 }
             }
-            return true
-        } catch (e: IOException) {
-            e.printStackTrace()
-            GachaStudioLogger.log("Failed to open file from assets: $filename", true)
-            return false
+            return map
         }
-    }
 
-    private fun getSystemLanguage(): String {
-        val currentLocale = Locale.getDefault()
-        return currentLocale.language
-    }
+        private fun parseKeyValue(line: String): Pair<String, String> {
+            val startIndexKey = line.indexOf(DELIMITER)
+            val endIndexKey = line.indexOf(DELIMITER, startIndexKey + 1)
+            val separatorIndex = line.indexOf("=")
 
-    private fun isLanguageFileAvailable(context: Context, filename: String): Boolean {
-        return try {
-            val inputStream = context.assets.open("localization/$filename")
-            inputStream.close()
-            true
-        } catch (e: IOException) {
-            false
-        }
-    }
+            if (startIndexKey >= 0 && endIndexKey > startIndexKey && separatorIndex > endIndexKey) {
+                val key = line.substring(startIndexKey + 1, endIndexKey)
 
-    private fun listLanguageFiles(context: Context) {
-        try {
-            val files = context.assets.list("localization")
-            files?.forEach {
-                GachaStudioLogger.log("File ditemukan: $it")
+                // Ambil nilai di sebelah kanan '=' dan hapus delimiter tanpa trim keseluruhan string
+                val rawValue = line.substring(separatorIndex + 1).replace(DELIMITER, "")
+                val value = processNewlines(rawValue)
+                return Pair(key, value)
             }
-        } catch (e: IOException) {
-            GachaStudioLogger.log("Gagal membaca direktori localization: ${e.message}", true)
+            return Pair("", "")
+        }
+
+        private fun processNewlines(value: String): String {
+            return value.replace(NEWLINE_PLACEHOLDER, "\n")
         }
     }
 
-    fun loadLanguageFile(context: Context, languageCode: String): Boolean {
-        val filename = "GachaStudio.$languageCode"
-        GachaStudioLogger.log("Memuat file bahasa: $filename")
-
-        listLanguageFiles(context)
-
-        return if (isLanguageFileAvailable(context, filename)) {
-            GachaStudioLogger.log("File bahasa ditemukan: $filename")
-            loadFileLangFromAssets(context, filename)
+    fun getString(key: String, vararg args: Any?): String {
+        val template = localizationMap[key] ?: "[$key]"
+        return if (args.isEmpty()) {
+            template
         } else {
-            GachaStudioLogger.log("File untuk bahasa $languageCode tidak ditemukan, fallback ke bahasa Inggris.")
-            loadFileLangFromAssets(context, "GachaStudio.en")
+            if (template.contains("%")) {
+                try {
+                    val nonNullableArgs = args.map { it?.toString() ?: "" }.toTypedArray()
+                    String.format(template, *nonNullableArgs)
+                } catch (e: Exception) {
+                    "[$key: Error formatting string]"
+                }
+            } else {
+                template + args.joinToString("")
+            }
         }
-    }
-
-    operator fun get(variable: String): String {
-        return translations[variable] ?: "Translation not found"
-    }
-
-    fun showToast(context: Context, key: String, duration: Int = Toast.LENGTH_SHORT) {
-        val message = this[key]
-        Toast.makeText(context, message, duration).show()
-    }
-
-    fun log(key: String) {
-        val message = this[key]
-        GachaStudioLogger.log(message)
-    }
-
-    fun showDialog(context: Context, key: String) {
-        val message = this[key]
-        android.app.AlertDialog.Builder(context)
-            .setMessage(message)
-            .setPositiveButton("OK", null)
-            .show()
     }
 }

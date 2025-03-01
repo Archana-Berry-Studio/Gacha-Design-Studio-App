@@ -1,0 +1,113 @@
+package com.lunime.githubcollab.archanaberry.gachadesignstudio
+
+import android.app.Activity
+import android.content.Context
+import android.os.Handler
+import android.os.Looper
+import android.os.Process
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import java.io.File
+import java.io.FileOutputStream
+import java.text.SimpleDateFormat
+import java.util.*
+import com.lunime.githubcollab.archanaberry.gachadesignstudio.*  // Pastikan GachaVariable.kt sudah ada
+
+class CrashHandler(private val context: Context) : Thread.UncaughtExceptionHandler {
+
+    private val localization: GachaStudioLocalization = GachaStudioLocalization.load(context)
+    private val defaultHandler: Thread.UncaughtExceptionHandler =
+        Thread.getDefaultUncaughtExceptionHandler()
+
+    override fun uncaughtException(t: Thread, e: Throwable) {
+        handleCrash(e)
+        defaultHandler.uncaughtException(t, e)
+    }
+
+    private fun handleCrash(e: Throwable) {
+        val crashReport = generateCrashReport(e)
+        val crashFile = saveCrashReport(crashReport)
+        showErrorDialog(crashFile, e)
+    }
+
+    private fun generateCrashReport(e: Throwable): String {
+        val timeStamp = SimpleDateFormat("ddMMMyyyy HH:mm:ss", Locale.getDefault()).format(Date())
+        // Gunakan pesan error dan stacktrace dari throwable
+        val crashError = e.localizedMessage ?: "No error message"
+        val crashStacktrace = e.stackTraceToString()
+
+        return """
+            ${localization.getString("gachastudio_crashreport")}
+            ----------------------------------
+            ${localization.getString("crash_time")}: $timeStamp
+            ${localization.getString("crash_error")}: $crashError
+            ${localization.getString("crash_stacktrace")}:
+            $crashStacktrace
+        """.trimIndent()
+    }
+
+    private fun saveCrashReport(crashReport: String): File {
+        // Misalnya, direktori crash report didefinisikan melalui localization
+        val crashDirName = localization.getString("crash_directory_name", "CrashReports")
+        val dirPath = "${context.filesDir}/$crashDirName"
+        val directory = File(dirPath)
+        if (!directory.exists()) {
+            directory.mkdirs()
+        }
+
+        val date = SimpleDateFormat("ddMMMyyyy_HHmmss", Locale.getDefault()).format(Date())
+        val filePrefix = localization.getString("file_prefix_crash", "crash")
+        val fileName = "$filePrefix-$date.txt"
+        val crashFile = File(directory, fileName)
+
+        FileOutputStream(crashFile).use { output ->
+            output.write(crashReport.toByteArray())
+        }
+        return crashFile
+    }
+
+    private fun showErrorDialog(crashFile: File, e: Throwable) {
+        val timeStamp = SimpleDateFormat("ddMMMyyyy HH:mm:ss", Locale.getDefault()).format(Date())
+        val crashError = e.localizedMessage ?: "No error message"
+        val stackTrace = e.stackTraceToString()
+
+        val message = """
+            ${localization.getString("crash_time")}: $timeStamp
+            ${localization.getString("crash_error")}: $crashError
+            ${localization.getString("crash_stacktrace")}:
+            $stackTrace
+        """.trimIndent()
+
+        val title = localization.getString("gachastudio_crashreport")
+        val buttonText = localization.getString("oke0")
+
+        val toastMessage = localization.getString("toast_file_saved", crashFile.absolutePath)
+
+        // Pastikan dialog dijalankan pada UI thread
+        if (context is Activity) {
+            context.runOnUiThread {
+                AlertDialog.Builder(context)
+                    .setTitle(title)
+                    .setMessage(message)
+                    .setPositiveButton(buttonText) { dialog, _ ->
+                        dialog.dismiss()
+                        Toast.makeText(context, toastMessage, Toast.LENGTH_LONG).show()
+                    }
+                    .setCancelable(false)  // Dialog tidak dapat dibatalkan dengan mengetuk di luar
+                    .show()
+            }
+        } else {
+            Handler(Looper.getMainLooper()).post {
+                AlertDialog.Builder(context)
+                    .setTitle(title)
+                    .setMessage(message)
+                    .setPositiveButton(buttonText) { dialog, _ ->
+                        dialog.dismiss()
+                        Toast.makeText(context, toastMessage, Toast.LENGTH_LONG).show()
+                    }
+                    .setCancelable(false)
+                    .show()
+            }
+        }
+    }
+}

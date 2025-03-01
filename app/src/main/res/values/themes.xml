@@ -1,12 +1,46 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Theme.MyApplication" parent="android:Theme.Material.Light.DarkActionBar">
-        <!-- Primary brand color. -->
-        <item name="android:colorPrimary">@color/purple_500</item>
-        <!-- Secondary brand color. -->
-        <item name="android:colorSecondary">@color/teal_200</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">@color/purple_700</item>
-        <!-- Customize your theme here. -->
+<resources>
+    <!-- Tema Terang -->
+    <style name="Theme.MyApp.Light" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Warna dasar -->
+        <item name="android:colorBackground">@color/colorBackgroundLight</item>
+        <item name="android:windowBackground">@color/colorBackgroundLight</item>
+        
+        <!-- Warna teks -->
+        <item name="android:textColorPrimary">@color/textColorPrimaryLight</item>
+        <item name="android:textColorSecondary">@color/textColorSecondaryLight</item>
+        <item name="android:textColor">@color/textColorPrimaryLight</item>
+        
+        <!-- Warna Material Design -->
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryVariant">@color/primaryDarkColor</item>
+        <item name="colorOnPrimary">@color/colorOnPrimaryLight</item>
+        <item name="colorSecondary">@color/accentColor</item>
+        <item name="colorSecondaryVariant">@color/accentColor</item>
+        <item name="colorOnSecondary">@color/colorOnPrimaryLight</item>
+        <item name="colorSurface">@color/surfaceColor</item>
+        <item name="colorOnSurface">@color/textColorPrimaryLight</item>
+        <item name="colorError">@color/errorColor</item>
+        <item name="colorOnError">@color/colorOnPrimaryLight</item>
+        
+        <!-- Typography -->
+        <item name="textAppearanceHeadline1">@style/TextAppearance.MyApp.Headline1</item>
+        <item name="textAppearanceHeadline2">@style/TextAppearance.MyApp.Headline2</item>
+        
+    </style>
+
+    <!-- Tema Umum -->
+    <style name="Theme.MyApplication" parent="Theme.MyApp.Light"/>
+    
+    <!-- TextAppearance -->
+    <style name="TextAppearance.MyApp.Headline1" parent="TextAppearance.MaterialComponents.Headline1">
+        <item name="android:textSize">24sp</item>
+        <item name="android:letterSpacing">0</item>
+        <item name="android:lineHeight">32sp</item>
+    </style>
+    
+    <style name="TextAppearance.MyApp.Headline2" parent="TextAppearance.MaterialComponents.Headline2">
+        <item name="android:textSize">20sp</item>
+        <item name="android:letterSpacing">0</item>
+        <item name="android:lineHeight">28sp</item>
     </style>
 </resources>

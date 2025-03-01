@@ -9,10 +9,10 @@ android {
 
     defaultConfig {
         applicationId = "com.lunime.githubcollab.archanaberry.gachadesignstudio"
-        minSdk = 21
+        minSdk = 30
         targetSdk = 33
         versionCode = 1
-        versionName = "v1.0_alpha"
+        versionName = "v0.001_alpha"
         manifestPlaceholders["MANAGE_EXTERNAL_STORAGE"] = true
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

@@ -1,0 +1,20 @@
+<resources>
+    <!-- Warna untuk tema gelap -->
+    <color name="colorBackgroundDark">#121212</color>
+    <color name="textColorPrimaryDark">#FFFFFF</color>
+    <color name="textColorSecondaryDark">#BDBDBD</color>
+    <color name="colorOnPrimaryDark">#000000</color>
+    <color name="purple">#BB86FC</color>
+    
+    <!-- Warna tambahan untuk kompatibilitas -->
+    <color name="primaryColor">#BB86FC</color>
+    <color name="primaryDarkColor">#3700B3</color>
+    <color name="accentColor">#03DAC6</color>
+    <color name="surfaceColor">#121212</color>
+    <color name="errorColor">#CF6679</color>
+    
+    <!-- Warna fallback untuk Android lawas -->
+    <color name="colorPrimary">@color/primaryColor</color>
+    <color name="colorPrimaryDark">@color/primaryDarkColor</color>
+    <color name="colorAccent">@color/accentColor</color>
+</resources>

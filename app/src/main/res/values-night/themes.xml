@@ -1,0 +1,33 @@
+<resources>
+    <!-- Tema Gelap -->
+    <style name="Theme.MyApp.Dark" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Warna dasar -->
+        <item name="android:colorBackground">@color/colorBackgroundDark</item>
+        <item name="android:windowBackground">@color/colorBackgroundDark</item>
+        
+        <!-- Warna teks -->
+        <item name="android:textColorPrimary">@color/textColorPrimaryDark</item>
+        <item name="android:textColorSecondary">@color/textColorSecondaryDark</item>
+        <item name="android:textColor">@color/textColorPrimaryDark</item>
+        
+        <!-- Warna Material Design -->
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryVariant">@color/primaryDarkColor</item>
+        <item name="colorOnPrimary">@color/colorOnPrimaryDark</item>
+        <item name="colorSecondary">@color/accentColor</item>
+        <item name="colorSecondaryVariant">@color/accentColor</item>
+        <item name="colorOnSecondary">@color/colorOnPrimaryDark</item>
+        <item name="colorSurface">@color/surfaceColor</item>
+        <item name="colorOnSurface">@color/textColorPrimaryDark</item>
+        <item name="colorError">@color/errorColor</item>
+        <item name="colorOnError">@color/colorOnPrimaryDark</item>
+        
+        <!-- Typography -->
+        <item name="textAppearanceHeadline1">@style/TextAppearance.MyApp.Headline1</item>
+        <item name="textAppearanceHeadline2">@style/TextAppearance.MyApp.Headline2</item>
+        
+    </style>
+
+    <!-- Tema Umum di Mode Gelap -->
+    <style name="Theme.MyApplication" parent="Theme.MyApp.Dark"/>
+</resources>
