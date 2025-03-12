@@ -74,7 +74,7 @@ Proyek ini masih dalam pengembangan dan dikerjakan secara bertahap di waktu luan
 Kami berkomitmen untuk merancang ulang proyek ini dengan struktur yang lebih baik.  
 
 Selain itu, kami berencana merilis game ini di Play Store apabila mendapatkan izin resmi dari Lunime.  
-**Dilarang mengompilasi ulang proyek ini serta mengunggah aplikasi tanpa izin dari kami dan Lunime!**
+**Dilarang mengompilasi ulang proyek ini serta mengunggah aplikasi tanpa izin dari kami dan Lunime!**  
 _Proyek game ini sedang tahap pengembangan..._
 
 ## Terimakasih untuk:
