@@ -32,7 +32,7 @@ Game webview ini masih menimbulkan banyak bugs...
 | Mengunduh resource game    | Mengunduh sumber daya dengan indikator di dialog box dan juga di notifikasi.             | ✅ |
 | Keluar dengan konfirmasi dua kali klik      | Ketuk dua kali agar aplikasi dapat dikonfirmasi agar aman untuk keluar dari gane agar tidak mereset sesi game.         | ✅ |
 | FullScreen                 | Merespons layar penuh untuk semua device baik ponsel atau tablet atau komputer PC.                   | ✅ |
-| Tema terang gelap secara dinamis                | Merespons tema dan akan mengikuti setelan tema di setelan sistem, ini akan mempengaruhi tema di game web nya juga (dipengaruhi juga menggunakan metode fetch systemTheme())                   | 💡 |
+| Tema terang gelap secara dinamis                | Merespons tema dan akan mengikuti setelan tema di setelan sistem, ini akan mempengaruhi tema di game web nya juga (dipengaruhi juga menggunakan metode fetch systemTheme()), namun masih belum sempurna                 | ✅ |
 | Exit button escape & back (untuk android)                | Merespons tombol back atau esc sebagai tombol keluar atau pause studio ketika ditekan.                   | 💡 |
 | Berbagi server studio atau Menerima klien studio dari saya ke teman dan ke teman lainnya via wlan0 (hotspot/wifi rumah (server kecil kecilan))               | Merespons server dan klien untuk melalukan berbagi studiospaces kepada teman melalui wlan0 dengan IPv4 (IP versi 4) menggunakan websocket untuk menjamin real time tiap pergerakan.              | ❌ |
 | Responsif                 | Merespons perubahan orientasi dan ukuran layar perangkat Android untuk tampilan yang optimal.                   | ✅ |
