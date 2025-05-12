@@ -1,7 +1,8 @@
+
+/* -------------------------- Extractman.kt -------------------------- */
 package com.lunime.githubcollab.archanaberry.gachadesignstudio.resman
 
 import com.lunime.githubcollab.archanaberry.gachadesignstudio.*
-
 import java.io.*
 import java.util.zip.ZipEntry
 import java.util.zip.ZipInputStream
@@ -18,93 +19,62 @@ class Extractman(private val localization: GachaStudioLocalization) {
         DEST_DIR_PATH = "$baseDir$APP_FOLDER/"
     }
 
-    fun unzip(zipFilePath: String, destDirectory: String) {
-        try {
-            val destDir = File(destDirectory)
-            if (!destDir.exists()) {
-                destDir.mkdirs()
-                GachaStudioLogger.log(localization.getString("create_folder", destDir))
-            }
+    fun manualExtract(): Boolean {
+        return unzip(ZIP_FILE_PATH!!, EXTRACTED_DIR_PATH!!)
+                && moveExtractedFiles(SOURCE_DIR_PATH!!, DEST_DIR_PATH!!)
+                && deleteTempDirectory()
+    }
 
+    private fun unzip(zipFilePath: String, extractedDirPath: String): Boolean {
+        return try {
+            val destDir = File(extractedDirPath).apply { mkdirs() }
             ZipInputStream(FileInputStream(zipFilePath)).use { zipIn ->
-                var entry: ZipEntry? = zipIn.nextEntry
-                while (entry != null) {
-                    val filePath = "$destDirectory${File.separator}${entry.name}"
-                    if (!entry.isDirectory) {
-                        extractFile(zipIn, filePath)
-                        GachaStudioLogger.log(localization.getString("extracting_file", filePath))
+                var entry: ZipEntry?
+                while (zipIn.nextEntry.also { entry = it } != null) {
+                    val file = File(destDir, entry!!.name)
+                    if (entry!!.isDirectory) {
+                        file.mkdirs()
                     } else {
-                        File(filePath).mkdirs()
-                        GachaStudioLogger.log(localization.getString("create_folder", filePath))
+                        file.parentFile?.mkdirs()
+                        FileOutputStream(file).use { output ->
+                            val buffer = ByteArray(1024)
+                            var len: Int
+                            while (zipIn.read(buffer).also { len = it } != -1) {
+                                output.write(buffer, 0, len)
+                            }
+                        }
                     }
                     zipIn.closeEntry()
-                    entry = zipIn.nextEntry
                 }
             }
-            GachaStudioLogger.log(localization.getString("close_extraction"))
-        } catch (e: IOException) {
-            GachaStudioLogger.log(localization.getString("extraction_error", e.message), isError = true)
-            e.printStackTrace()
+            true
+        } catch (e: Exception) {
+            GachaStudioLogger.log("Ekstraksi manual gagal: ${e.message}", isError = true)
+            false
         }
     }
 
-    private fun extractFile(zipIn: ZipInputStream, filePath: String) {
-        try {
-            File(filePath).parentFile?.mkdirs()
-            BufferedOutputStream(FileOutputStream(filePath)).use { bos ->
-                val buffer = ByteArray(4096)
-                var len: Int
-                while (zipIn.read(buffer).also { len = it } != -1) {
-                    bos.write(buffer, 0, len)
-                }
+    private fun moveExtractedFiles(sourcePath: String, destPath: String): Boolean {
+        return try {
+            val sourceDir = File(sourcePath)
+            val destDir = File(destPath).apply { mkdirs() }
+            sourceDir.listFiles()?.forEach { file ->
+                file.renameTo(File(destDir, file.name))
             }
-            GachaStudioLogger.log(localization.getString("file_extracted", filePath))
-        } catch (e: IOException) {
-            GachaStudioLogger.log(localization.getString("bos_error", e.message), isError = true)
-            e.printStackTrace()
+            true
+        } catch (e: Exception) {
+            GachaStudioLogger.log("Pemindahan manual gagal: ${e.message}", isError = true)
+            false
         }
     }
 
-    fun moveExtractedFiles(srcDirPath: String, destDirPath: String) {
-        try {
-            val srcDir = File(srcDirPath)
-            val destDir = File(destDirPath)
-
-            if (!destDir.exists()) {
-                destDir.mkdirs()
-                GachaStudioLogger.log(localization.getString("move_extracted_files", srcDir, destDir))
-            }
-
-            srcDir.walkTopDown().forEach { file ->
-                val relativePath = file.relativeTo(srcDir)
-                val destFile = File(destDir, relativePath.path)
-                if (file.isDirectory) {
-                    destFile.mkdirs()
-                    GachaStudioLogger.log(localization.getString("copy_files", relativePath, destFile))
-                } else {
-                    file.copyTo(destFile, overwrite = true)
-                    GachaStudioLogger.log(localization.getString("overwrite_warning"), isError = true)
-                }
-            }
-
-            if (srcDir.exists()) {
-                srcDir.deleteRecursively()
-                GachaStudioLogger.log(localization.getString("delete_folder", srcDir), isError = true)
-            }
-        } catch (e: IOException) {
-            GachaStudioLogger.log(localization.getString("generic_error", e.message), isError = true)
-            e.printStackTrace()
-        }
-    }
-
-    fun deleteTempDirectory(tempDirPath: String) {
-        try {
-            val tempDir = File(tempDirPath)
-            tempDir.deleteRecursively()
-            GachaStudioLogger.log(localization.getString("delete_temp_to_free_memory", tempDir), isError = true)
-        } catch (e: IOException) {
-            GachaStudioLogger.log(localization.getString("temp_delete_error", e.message), isError = true)
-            e.printStackTrace()
+    private fun deleteTempDirectory(): Boolean {
+        return try {
+            File(TEMP_DIR_PATH).deleteRecursively()
+            true
+        } catch (e: Exception) {
+            GachaStudioLogger.log("Gagal hapus temp manual: ${e.message}", isError = true)
+            false
         }
     }
 }
